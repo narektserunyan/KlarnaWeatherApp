@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+final class CurrentWeatherViewModel {
+    private let api: Networking
+    
+    init(api: Networking = WebApi()) {
+        self.api = api
+    }
+}

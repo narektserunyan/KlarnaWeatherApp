@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+final class SearchCityViewModel {
+    
+    private let api: Networking
+    
+    init(api: Networking = WebApi()) {
+        self.api = api
+    }
+}

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CurrentWeatherViewController: UIViewController {
+final class CurrentWeatherViewController: Controller<CurrentWeatherViewModel> {
 
     override func viewDidLoad() {
         super.viewDidLoad()

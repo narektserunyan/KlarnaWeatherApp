@@ -20,6 +20,8 @@
 		D8AA01F02AA33B3300FE1E9B /* SearchCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01EF2AA33B3300FE1E9B /* SearchCityViewController.swift */; };
 		D8AA01F22AA33B3E00FE1E9B /* SearchCityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01F12AA33B3E00FE1E9B /* SearchCityViewModel.swift */; };
 		D8AA01F42AA33B4B00FE1E9B /* SearchCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01F32AA33B4B00FE1E9B /* SearchCityView.swift */; };
+		D8AA01F62AA33C2D00FE1E9B /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01F52AA33C2D00FE1E9B /* Controller.swift */; };
+		D8AA01F92AA33DF600FE1E9B /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01F82AA33DF600FE1E9B /* Networking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		D8AA01EF2AA33B3300FE1E9B /* SearchCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityViewController.swift; sourceTree = "<group>"; };
 		D8AA01F12AA33B3E00FE1E9B /* SearchCityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityViewModel.swift; sourceTree = "<group>"; };
 		D8AA01F32AA33B4B00FE1E9B /* SearchCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityView.swift; sourceTree = "<group>"; };
+		D8AA01F52AA33C2D00FE1E9B /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
+		D8AA01F82AA33DF600FE1E9B /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,8 +113,10 @@
 			children = (
 				D8AA01B92AA3392B00FE1E9B /* AppDelegate.swift */,
 				D8AA01BB2AA3392B00FE1E9B /* SceneDelegate.swift */,
-				D8AA01EE2AA33B1200FE1E9B /* SearchCity */,
+				D8AA01F52AA33C2D00FE1E9B /* Controller.swift */,
+				D8AA01F72AA33DDB00FE1E9B /* Networking */,
 				D8AA01E92AA33A2C00FE1E9B /* CurrentWeather */,
+				D8AA01EE2AA33B1200FE1E9B /* SearchCity */,
 				D8AA01C22AA3392C00FE1E9B /* Assets.xcassets */,
 				D8AA01C42AA3392C00FE1E9B /* LaunchScreen.storyboard */,
 				D8AA01C72AA3392C00FE1E9B /* Info.plist */,
@@ -139,8 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				D8AA01BD2AA3392B00FE1E9B /* CurrentWeatherViewController.swift */,
-				D8AA01EC2AA33B0500FE1E9B /* CurrentWeatherView.swift */,
 				D8AA01EA2AA33AF700FE1E9B /* CurrentWeatherViewModel.swift */,
+				D8AA01EC2AA33B0500FE1E9B /* CurrentWeatherView.swift */,
 			);
 			path = CurrentWeather;
 			sourceTree = "<group>";
@@ -153,6 +159,14 @@
 				D8AA01F32AA33B4B00FE1E9B /* SearchCityView.swift */,
 			);
 			path = SearchCity;
+			sourceTree = "<group>";
+		};
+		D8AA01F72AA33DDB00FE1E9B /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				D8AA01F82AA33DF600FE1E9B /* Networking.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,6 +299,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8AA01F62AA33C2D00FE1E9B /* Controller.swift in Sources */,
+				D8AA01F92AA33DF600FE1E9B /* Networking.swift in Sources */,
 				D8AA01BE2AA3392B00FE1E9B /* CurrentWeatherViewController.swift in Sources */,
 				D8AA01F42AA33B4B00FE1E9B /* SearchCityView.swift in Sources */,
 				D8AA01BA2AA3392B00FE1E9B /* AppDelegate.swift in Sources */,
