@@ -6,14 +6,28 @@
 //
 
 import UIKit
+import Combine
 
 final class CurrentWeatherViewController: Controller<CurrentWeatherViewModel> {
 
+    private var currentLocationView: CurrentWeatherView?
+    private var cancellables: Set<AnyCancellable> = []
+    
+    override func loadView() {
+        super.loadView()
+        currentLocationView = CurrentWeatherView(frame: view.bounds)
+        view = currentLocationView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        viewModel.$weather
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] weather in
+                guard let weather = weather else { return }
+            }
+            .store(in: &cancellables)
     }
-
-
 }
 

@@ -5,4 +5,27 @@
 //  Created by Narek Tserunyan on 02.09.23.
 //
 
-import Foundation
+import UIKit
+
+final class SearchCityView: UIView {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+        setupConstraints()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupViews()
+        setupConstraints()
+    }
+    
+    private func setupConstraints() {
+        
+    }
+    
+    private func setupViews() {
+        
+    }
+}
