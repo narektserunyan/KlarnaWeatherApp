@@ -9,13 +9,17 @@
 /* Begin PBXBuildFile section */
 		D8AA01BA2AA3392B00FE1E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01B92AA3392B00FE1E9B /* AppDelegate.swift */; };
 		D8AA01BC2AA3392B00FE1E9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01BB2AA3392B00FE1E9B /* SceneDelegate.swift */; };
-		D8AA01BE2AA3392B00FE1E9B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01BD2AA3392B00FE1E9B /* ViewController.swift */; };
-		D8AA01C12AA3392B00FE1E9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8AA01BF2AA3392B00FE1E9B /* Main.storyboard */; };
+		D8AA01BE2AA3392B00FE1E9B /* CurrentWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01BD2AA3392B00FE1E9B /* CurrentWeatherViewController.swift */; };
 		D8AA01C32AA3392C00FE1E9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8AA01C22AA3392C00FE1E9B /* Assets.xcassets */; };
 		D8AA01C62AA3392C00FE1E9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8AA01C42AA3392C00FE1E9B /* LaunchScreen.storyboard */; };
 		D8AA01D12AA3392C00FE1E9B /* KlarnaWeatherAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01D02AA3392C00FE1E9B /* KlarnaWeatherAppTests.swift */; };
 		D8AA01DB2AA3392C00FE1E9B /* KlarnaWeatherAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01DA2AA3392C00FE1E9B /* KlarnaWeatherAppUITests.swift */; };
 		D8AA01DD2AA3392C00FE1E9B /* KlarnaWeatherAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01DC2AA3392C00FE1E9B /* KlarnaWeatherAppUITestsLaunchTests.swift */; };
+		D8AA01EB2AA33AF700FE1E9B /* CurrentWeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01EA2AA33AF700FE1E9B /* CurrentWeatherViewModel.swift */; };
+		D8AA01ED2AA33B0500FE1E9B /* CurrentWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01EC2AA33B0500FE1E9B /* CurrentWeatherView.swift */; };
+		D8AA01F02AA33B3300FE1E9B /* SearchCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01EF2AA33B3300FE1E9B /* SearchCityViewController.swift */; };
+		D8AA01F22AA33B3E00FE1E9B /* SearchCityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01F12AA33B3E00FE1E9B /* SearchCityViewModel.swift */; };
+		D8AA01F42AA33B4B00FE1E9B /* SearchCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01F32AA33B4B00FE1E9B /* SearchCityView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +43,7 @@
 		D8AA01B62AA3392B00FE1E9B /* KlarnaWeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KlarnaWeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8AA01B92AA3392B00FE1E9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8AA01BB2AA3392B00FE1E9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D8AA01BD2AA3392B00FE1E9B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D8AA01C02AA3392B00FE1E9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D8AA01BD2AA3392B00FE1E9B /* CurrentWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherViewController.swift; sourceTree = "<group>"; };
 		D8AA01C22AA3392C00FE1E9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D8AA01C52AA3392C00FE1E9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D8AA01C72AA3392C00FE1E9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +52,11 @@
 		D8AA01D62AA3392C00FE1E9B /* KlarnaWeatherAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KlarnaWeatherAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8AA01DA2AA3392C00FE1E9B /* KlarnaWeatherAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlarnaWeatherAppUITests.swift; sourceTree = "<group>"; };
 		D8AA01DC2AA3392C00FE1E9B /* KlarnaWeatherAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlarnaWeatherAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D8AA01EA2AA33AF700FE1E9B /* CurrentWeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherViewModel.swift; sourceTree = "<group>"; };
+		D8AA01EC2AA33B0500FE1E9B /* CurrentWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherView.swift; sourceTree = "<group>"; };
+		D8AA01EF2AA33B3300FE1E9B /* SearchCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityViewController.swift; sourceTree = "<group>"; };
+		D8AA01F12AA33B3E00FE1E9B /* SearchCityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityViewModel.swift; sourceTree = "<group>"; };
+		D8AA01F32AA33B4B00FE1E9B /* SearchCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +109,8 @@
 			children = (
 				D8AA01B92AA3392B00FE1E9B /* AppDelegate.swift */,
 				D8AA01BB2AA3392B00FE1E9B /* SceneDelegate.swift */,
-				D8AA01BD2AA3392B00FE1E9B /* ViewController.swift */,
-				D8AA01BF2AA3392B00FE1E9B /* Main.storyboard */,
+				D8AA01EE2AA33B1200FE1E9B /* SearchCity */,
+				D8AA01E92AA33A2C00FE1E9B /* CurrentWeather */,
 				D8AA01C22AA3392C00FE1E9B /* Assets.xcassets */,
 				D8AA01C42AA3392C00FE1E9B /* LaunchScreen.storyboard */,
 				D8AA01C72AA3392C00FE1E9B /* Info.plist */,
@@ -125,6 +133,26 @@
 				D8AA01DC2AA3392C00FE1E9B /* KlarnaWeatherAppUITestsLaunchTests.swift */,
 			);
 			path = KlarnaWeatherAppUITests;
+			sourceTree = "<group>";
+		};
+		D8AA01E92AA33A2C00FE1E9B /* CurrentWeather */ = {
+			isa = PBXGroup;
+			children = (
+				D8AA01BD2AA3392B00FE1E9B /* CurrentWeatherViewController.swift */,
+				D8AA01EC2AA33B0500FE1E9B /* CurrentWeatherView.swift */,
+				D8AA01EA2AA33AF700FE1E9B /* CurrentWeatherViewModel.swift */,
+			);
+			path = CurrentWeather;
+			sourceTree = "<group>";
+		};
+		D8AA01EE2AA33B1200FE1E9B /* SearchCity */ = {
+			isa = PBXGroup;
+			children = (
+				D8AA01EF2AA33B3300FE1E9B /* SearchCityViewController.swift */,
+				D8AA01F12AA33B3E00FE1E9B /* SearchCityViewModel.swift */,
+				D8AA01F32AA33B4B00FE1E9B /* SearchCityView.swift */,
+			);
+			path = SearchCity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,7 +261,6 @@
 			files = (
 				D8AA01C62AA3392C00FE1E9B /* LaunchScreen.storyboard in Resources */,
 				D8AA01C32AA3392C00FE1E9B /* Assets.xcassets in Resources */,
-				D8AA01C12AA3392B00FE1E9B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,9 +285,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8AA01BE2AA3392B00FE1E9B /* ViewController.swift in Sources */,
+				D8AA01BE2AA3392B00FE1E9B /* CurrentWeatherViewController.swift in Sources */,
+				D8AA01F42AA33B4B00FE1E9B /* SearchCityView.swift in Sources */,
 				D8AA01BA2AA3392B00FE1E9B /* AppDelegate.swift in Sources */,
 				D8AA01BC2AA3392B00FE1E9B /* SceneDelegate.swift in Sources */,
+				D8AA01F22AA33B3E00FE1E9B /* SearchCityViewModel.swift in Sources */,
+				D8AA01F02AA33B3300FE1E9B /* SearchCityViewController.swift in Sources */,
+				D8AA01ED2AA33B0500FE1E9B /* CurrentWeatherView.swift in Sources */,
+				D8AA01EB2AA33AF700FE1E9B /* CurrentWeatherViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +329,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D8AA01BF2AA3392B00FE1E9B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D8AA01C02AA3392B00FE1E9B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D8AA01C42AA3392C00FE1E9B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -442,7 +466,6 @@
 				INFOPLIST_FILE = KlarnaWeatherApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -470,7 +493,6 @@
 				INFOPLIST_FILE = KlarnaWeatherApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
