@@ -10,16 +10,18 @@ import CoreLocation
 import Combine
 
 protocol LocationApi {
-    func retrievePlacemarks(loc: CLLocation?) -> AnyPublisher<String?, Error>
+    func retrievePlacemarks(location: CLLocation?) -> AnyPublisher<String?, Error>
 }
 
-class RealLocationService: LocationApi {
+final class RealLocationService: LocationApi {
+    
     private let geocoder = CLGeocoder()
-    func retrievePlacemarks(loc: CLLocation?) -> AnyPublisher<String?, Error> {
-        guard let location = loc else { return Fail(error: LocationError.fetchError).eraseToAnyPublisher() }
+    
+    func retrievePlacemarks(location: CLLocation?) -> AnyPublisher<String?, Error> {
+        guard let location = location else { return Fail(error: LocationError.fetchError).eraseToAnyPublisher() }
+        
         return geocoder.reverseGeocodeLocationPublisher(location)
             .map { value -> String? in
-                print(value)
                 return value.locality
             }.eraseToAnyPublisher()
     }

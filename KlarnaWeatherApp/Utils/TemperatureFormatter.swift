@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TemperatureFormatter {
+final class TemperatureFormatter {
     
     func celciusFormatString(from kelvin: Double) -> String {
         let celcius = kelvin - 273.15

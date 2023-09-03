@@ -14,9 +14,8 @@ final class LocationService: NSObject {
     private(set) var locationError = PassthroughSubject<LocationError?, Never>()
     
     private let locationManager = CLLocationManager()
-    
-    
     private let api: LocationApi
+    
     init(api: LocationApi = RealLocationService()) {
         self.api = api
         super.init()
@@ -35,8 +34,8 @@ final class LocationService: NSObject {
         }
     }
     
-    func retrievePlacemarks(loc: CLLocation?) -> AnyPublisher<String?, Error> {
-        return api.retrievePlacemarks(loc: loc)
+    func retrievePlacemarks(location: CLLocation?) -> AnyPublisher<String?, Error> {
+        return api.retrievePlacemarks(location: location)
     }
 }
 

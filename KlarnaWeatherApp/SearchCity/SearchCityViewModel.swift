@@ -17,15 +17,11 @@ final class SearchCityViewModel {
         self.api = api
     }
     
-    func fetchLocations(by query: String) -> AnyPublisher<Void, Error> {
+    func fetchLocations(by query: String) -> AnyPublisher<[Location], Error> {
         return api.fetchLocations(by: query)
-            .mapError { error in
-                return error
-            }
             .handleEvents(receiveOutput: { [weak self] locations in
                 self?.locations.send(locations)
             })
-            .map { _ in return () }
             .eraseToAnyPublisher()
     }
 }

@@ -29,6 +29,10 @@ final class SearchCityViewController: Controller<SearchCityViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setBindings()
+    }
+    
+    private func setBindings() {
         viewModel.locations
             .receive(on: DispatchQueue.main)
             .compactMap{$0}
@@ -53,7 +57,6 @@ final class SearchCityViewController: Controller<SearchCityViewModel> {
                 }
             })
             .store(in: &cancellables)
-        
     }
     
     private func fetchLocations(with query: String) {

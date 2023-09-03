@@ -14,22 +14,13 @@ final class SearchCityView: UIView {
     
     private let tableView = UITableView()
     private let searchController = UISearchController(searchResultsController: nil)
+    private let errorLabel = UILabel()
 
     private var shouldShowInvalidSearchResult: Bool = false
     
     let onQueryChange = PassthroughSubject<String, Never>()
     var onSetDefaultChange = PassthroughSubject<Int, Never>()
     private var cancellables: Set<AnyCancellable> = []
-    
-    let errorLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.text = "There are some issues with connection"
-        lbl.textColor = .gray
-        lbl.font = UIFont.systemFont(ofSize: 16)
-        lbl.isHidden = true
-        return lbl
-    }()
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -73,7 +64,6 @@ final class SearchCityView: UIView {
     }
     
     private func setupViews() {
-        
         searchController.searchResultsUpdater = self
         tableView.delegate = self
         tableView.dataSource = self
@@ -85,6 +75,10 @@ final class SearchCityView: UIView {
         tableView.tableHeaderView = searchController.searchBar
         
         tableView.addSubview(errorLabel)
+        errorLabel.text = "There are some issues with connection"
+        errorLabel.textColor = .gray
+        errorLabel.font = UIFont.systemFont(ofSize: 16)
+        errorLabel.isHidden = true
     }
 }
 
@@ -118,7 +112,6 @@ extension SearchCityView: UITableViewDelegate, UITableViewDataSource {
         if let location = viewModel?.locations.value?[indexPath.row] {
             cell.cityNameLabel.text = "\(location.name) (\(location.country))"
         }
-        
         return cell
     }
 }

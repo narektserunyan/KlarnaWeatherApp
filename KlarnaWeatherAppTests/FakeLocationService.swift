@@ -10,9 +10,9 @@ import Combine
 import CoreLocation
 @testable import KlarnaWeatherApp
 
-class FakeLocationService: LocationApi {
+final class FakeLocationService: LocationApi {
     var shouldReturnError = false
-    func retrievePlacemarks(loc: CLLocation?) -> AnyPublisher<String?, Error> {
+    func retrievePlacemarks(location: CLLocation?) -> AnyPublisher<String?, Error> {
         if shouldReturnError {
             return Fail(error: LocationError.fetchError).eraseToAnyPublisher()
         }

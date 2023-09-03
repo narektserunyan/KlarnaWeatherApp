@@ -6,11 +6,12 @@
 //
 
 import UIKit
-
-import UIKit
 import Combine
 
 final class SearchCityCustomCell: UITableViewCell {
+    
+    var cancellable: AnyCancellable?
+    let tapButton = PassthroughSubject<Int, Never>()
     
     let setDefaultCityButton: UIButton = {
         let btn = UIButton()
@@ -26,9 +27,6 @@ final class SearchCityCustomCell: UITableViewCell {
         return lbl
     }()
     
-    var cancellable: AnyCancellable?
-    let tapButton = PassthroughSubject<Int, Never>()
-        
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

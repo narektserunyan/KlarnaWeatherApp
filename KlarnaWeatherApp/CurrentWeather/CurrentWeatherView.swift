@@ -49,6 +49,14 @@ final class CurrentWeatherView: UIView {
     func shoudlShowError(show: Bool) {
         currentLocationError.isHidden = !show
     }
+    
+    func startLoading() {
+        activityIndicator.startAnimating()
+    }
+    
+    func stopLoading() {
+        activityIndicator.stopAnimating()
+    }
 
     private func setupConstraints() {
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -111,14 +119,6 @@ final class CurrentWeatherView: UIView {
         ])
     }
     
-    func startloading() {
-        activityIndicator.startAnimating()
-    }
-    
-    func stoploading() {
-        activityIndicator.stopAnimating()
-    }
-    
     private func setupViews() {
         addSubview(contentView)
         contentView.backgroundColor = .black
@@ -168,6 +168,7 @@ final class CurrentWeatherView: UIView {
         //
         
         currentLocationError.text = "Current location couln't be determined, enable from system settings"
+        currentLocationError.isHidden = true
         currentLocationError.font = UIFont.boldSystemFont(ofSize: 15)
         currentLocationError.textColor = .darkText
         currentLocationError.textAlignment = .center

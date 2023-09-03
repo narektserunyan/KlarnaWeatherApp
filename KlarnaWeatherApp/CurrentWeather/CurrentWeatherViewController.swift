@@ -13,7 +13,7 @@ final class CurrentWeatherViewController: Controller<CurrentWeatherViewModel> {
     
     private var currentWeatherView: CurrentWeatherView?
     private var cancellables: Set<AnyCancellable> = []
-
+    
     override func loadView() {
         super.loadView()
         currentWeatherView = CurrentWeatherView(frame: view.bounds)
@@ -23,11 +23,23 @@ final class CurrentWeatherViewController: Controller<CurrentWeatherViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setBindings()
+        
+        updateWithCurrentLocation()
+        
+        let currentLocationButton = UIBarButtonItem(image: UIImage(systemName: "location.square"), style: .done, target: self, action: #selector(updateWithCurrentLocation))
+        navigationItem.leftBarButtonItems = [currentLocationButton]
+        
+        let searchCityButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchCity))
+        navigationItem.rightBarButtonItems = [searchCityButton]
+    }
+    
+    private func setBindings() {
         viewModel.locationError
             .receive(on: DispatchQueue.main)
             .sink { [weak self] locationErr in
                 if locationErr != nil {
-                    self?.currentWeatherView?.stoploading()
+                    self?.currentWeatherView?.stopLoading()
                 }
                 self?.currentWeatherView?.shoudlShowError(show: locationErr != nil)
             }
@@ -45,20 +57,11 @@ final class CurrentWeatherViewController: Controller<CurrentWeatherViewModel> {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _weather in
                 guard let _weather = _weather else { return }
-                self?.currentWeatherView?.stoploading()
+                self?.currentWeatherView?.stopLoading()
                 self?.currentWeatherView?.updateUI(with: _weather)
                 
             }
             .store(in: &cancellables)
-        
-        
-        updateWithCurrentLocation()
-        
-        let currentLocationButton = UIBarButtonItem(image: UIImage(systemName: "location.square"), style: .done, target: self, action: #selector(updateWithCurrentLocation))
-        navigationItem.leftBarButtonItems = [currentLocationButton]
-        
-        let searchCityButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchCity))
-        navigationItem.rightBarButtonItems = [searchCityButton]
     }
     
     @objc private func searchCity() {
@@ -74,9 +77,9 @@ final class CurrentWeatherViewController: Controller<CurrentWeatherViewModel> {
         
         navigationController?.pushViewController(searchCityViewController, animated: true)
     }
-        
+    
     @objc private func updateWithCurrentLocation() {
-        currentWeatherView?.startloading()
+        currentWeatherView?.startLoading()
         viewModel.fetchCurrentLocation()
     }
     

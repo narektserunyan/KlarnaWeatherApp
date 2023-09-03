@@ -9,7 +9,7 @@ import Foundation
 import Combine
 @testable import KlarnaWeatherApp
 
-class FakeAPIService: Networking {
+final class FakeAPIService: Networking {
     var shouldReturnError = false
     
     func fetchLocations(by query: String) -> AnyPublisher<[Location], Error> {

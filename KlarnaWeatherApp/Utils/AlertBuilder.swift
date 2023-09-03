@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ErrorAlertBuilder {
+final class ErrorAlertBuilder {
     private var title = "Oops"
     private var message = "Something went wrong"
     private var dismissButtonTitile = "Dismiss"
