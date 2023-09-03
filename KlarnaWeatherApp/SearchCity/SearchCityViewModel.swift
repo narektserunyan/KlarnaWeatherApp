@@ -10,20 +10,20 @@ import Combine
 
 final class SearchCityViewModel {
     
-    @Published private(set) var locations: [Location]?
-    private let api: Networking
+    private(set) var locations = CurrentValueSubject<[Location]?, Never>(nil)
     
+    private let api: Networking
     init(api: Networking = WebApi()) {
         self.api = api
     }
     
-    func fetchLocations(by query: String) -> AnyPublisher<Void, APIError> {
+    func fetchLocations(by query: String) -> AnyPublisher<Void, Error> {
         return api.fetchLocations(by: query)
             .mapError { error in
-                return APIError.requestFailed(error)
+                return error
             }
             .handleEvents(receiveOutput: { [weak self] locations in
-                self?.locations = locations
+                self?.locations.send(locations)
             })
             .map { _ in return () }
             .eraseToAnyPublisher()

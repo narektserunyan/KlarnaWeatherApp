@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D844F3682AA5151800194651 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D844F3672AA5151800194651 /* Reachability.swift */; };
+		D844F36A2AA5155400194651 /* LocationApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D844F3692AA5155400194651 /* LocationApi.swift */; };
+		D844F36C2AA515E100194651 /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D844F36B2AA515E100194651 /* AlertBuilder.swift */; };
+		D844F36E2AA5224D00194651 /* FakeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D844F36D2AA5224D00194651 /* FakeAPIService.swift */; };
+		D844F3702AA5225900194651 /* FakeLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D844F36F2AA5225900194651 /* FakeLocationService.swift */; };
 		D8AA01BA2AA3392B00FE1E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01B92AA3392B00FE1E9B /* AppDelegate.swift */; };
 		D8AA01BC2AA3392B00FE1E9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01BB2AA3392B00FE1E9B /* SceneDelegate.swift */; };
 		D8AA01BE2AA3392B00FE1E9B /* CurrentWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA01BD2AA3392B00FE1E9B /* CurrentWeatherViewController.swift */; };
@@ -30,6 +35,8 @@
 		D8AA02072AA3406900FE1E9B /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA02062AA3406900FE1E9B /* Weather.swift */; };
 		D8AA020C2AA3536900FE1E9B /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA020B2AA3536900FE1E9B /* LocationService.swift */; };
 		D8AA020E2AA3537200FE1E9B /* LocationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA020D2AA3537200FE1E9B /* LocationError.swift */; };
+		D8AA02102AA3A1CA00FE1E9B /* SearchCityCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA020F2AA3A1CA00FE1E9B /* SearchCityCustomCell.swift */; };
+		D8AA02122AA3A62300FE1E9B /* TemperatureFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA02112AA3A62300FE1E9B /* TemperatureFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +57,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D844F3672AA5151800194651 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		D844F3692AA5155400194651 /* LocationApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationApi.swift; sourceTree = "<group>"; };
+		D844F36B2AA515E100194651 /* AlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
+		D844F36D2AA5224D00194651 /* FakeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAPIService.swift; sourceTree = "<group>"; };
+		D844F36F2AA5225900194651 /* FakeLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLocationService.swift; sourceTree = "<group>"; };
 		D8AA01B62AA3392B00FE1E9B /* KlarnaWeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KlarnaWeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8AA01B92AA3392B00FE1E9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8AA01BB2AA3392B00FE1E9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +89,8 @@
 		D8AA02062AA3406900FE1E9B /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		D8AA020B2AA3536900FE1E9B /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		D8AA020D2AA3537200FE1E9B /* LocationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationError.swift; sourceTree = "<group>"; };
+		D8AA020F2AA3A1CA00FE1E9B /* SearchCityCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityCustomCell.swift; sourceTree = "<group>"; };
+		D8AA02112AA3A62300FE1E9B /* TemperatureFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,10 +144,10 @@
 				D8AA01B92AA3392B00FE1E9B /* AppDelegate.swift */,
 				D8AA01BB2AA3392B00FE1E9B /* SceneDelegate.swift */,
 				D8AA01F52AA33C2D00FE1E9B /* Controller.swift */,
+				D8AA01F72AA33DDB00FE1E9B /* Networking */,
 				D8AA020A2AA3535500FE1E9B /* LocationService */,
 				D8AA02032AA3404A00FE1E9B /* Models */,
 				D8AA02002AA33FD000FE1E9B /* Utils */,
-				D8AA01F72AA33DDB00FE1E9B /* Networking */,
 				D8AA01E92AA33A2C00FE1E9B /* CurrentWeather */,
 				D8AA01EE2AA33B1200FE1E9B /* SearchCity */,
 				D8AA01C22AA3392C00FE1E9B /* Assets.xcassets */,
@@ -148,6 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				D8AA01D02AA3392C00FE1E9B /* KlarnaWeatherAppTests.swift */,
+				D844F36D2AA5224D00194651 /* FakeAPIService.swift */,
+				D844F36F2AA5225900194651 /* FakeLocationService.swift */,
 			);
 			path = KlarnaWeatherAppTests;
 			sourceTree = "<group>";
@@ -177,6 +193,7 @@
 				D8AA01EF2AA33B3300FE1E9B /* SearchCityViewController.swift */,
 				D8AA01F12AA33B3E00FE1E9B /* SearchCityViewModel.swift */,
 				D8AA01F32AA33B4B00FE1E9B /* SearchCityView.swift */,
+				D8AA020F2AA3A1CA00FE1E9B /* SearchCityCustomCell.swift */,
 			);
 			path = SearchCity;
 			sourceTree = "<group>";
@@ -187,6 +204,7 @@
 				D8AA01F82AA33DF600FE1E9B /* Networking.swift */,
 				D8AA01FA2AA33F6900FE1E9B /* Request.swift */,
 				D8AA01FC2AA33F7200FE1E9B /* APIError.swift */,
+				D844F3672AA5151800194651 /* Reachability.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -195,6 +213,8 @@
 			isa = PBXGroup;
 			children = (
 				D8AA02012AA33FE100FE1E9B /* PlistExtractor.swift */,
+				D8AA02112AA3A62300FE1E9B /* TemperatureFormatter.swift */,
+				D844F36B2AA515E100194651 /* AlertBuilder.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -211,6 +231,7 @@
 		D8AA020A2AA3535500FE1E9B /* LocationService */ = {
 			isa = PBXGroup;
 			children = (
+				D844F3692AA5155400194651 /* LocationApi.swift */,
 				D8AA020B2AA3536900FE1E9B /* LocationService.swift */,
 				D8AA020D2AA3537200FE1E9B /* LocationError.swift */,
 			);
@@ -351,8 +372,11 @@
 				D8AA01F62AA33C2D00FE1E9B /* Controller.swift in Sources */,
 				D8AA01F92AA33DF600FE1E9B /* Networking.swift in Sources */,
 				D8AA01BE2AA3392B00FE1E9B /* CurrentWeatherViewController.swift in Sources */,
+				D844F36A2AA5155400194651 /* LocationApi.swift in Sources */,
+				D8AA02102AA3A1CA00FE1E9B /* SearchCityCustomCell.swift in Sources */,
 				D8AA01F42AA33B4B00FE1E9B /* SearchCityView.swift in Sources */,
 				D8AA020E2AA3537200FE1E9B /* LocationError.swift in Sources */,
+				D8AA02122AA3A62300FE1E9B /* TemperatureFormatter.swift in Sources */,
 				D8AA02072AA3406900FE1E9B /* Weather.swift in Sources */,
 				D8AA01FB2AA33F6900FE1E9B /* Request.swift in Sources */,
 				D8AA01FD2AA33F7200FE1E9B /* APIError.swift in Sources */,
@@ -364,6 +388,8 @@
 				D8AA01F22AA33B3E00FE1E9B /* SearchCityViewModel.swift in Sources */,
 				D8AA01F02AA33B3300FE1E9B /* SearchCityViewController.swift in Sources */,
 				D8AA01ED2AA33B0500FE1E9B /* CurrentWeatherView.swift in Sources */,
+				D844F36C2AA515E100194651 /* AlertBuilder.swift in Sources */,
+				D844F3682AA5151800194651 /* Reachability.swift in Sources */,
 				D8AA01EB2AA33AF700FE1E9B /* CurrentWeatherViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,7 +398,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D844F3702AA5225900194651 /* FakeLocationService.swift in Sources */,
 				D8AA01D12AA3392C00FE1E9B /* KlarnaWeatherAppTests.swift in Sources */,
+				D844F36E2AA5224D00194651 /* FakeAPIService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

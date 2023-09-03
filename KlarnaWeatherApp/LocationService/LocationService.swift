@@ -10,13 +10,15 @@ import CoreLocation
 import Combine
 
 final class LocationService: NSObject {
-    @Published private(set) var location: CLLocation?
-    @Published private(set) var locationError: LocationError?
+    private(set) var location = PassthroughSubject<CLLocation?, Never>()
+    private(set) var locationError = PassthroughSubject<LocationError?, Never>()
     
     private let locationManager = CLLocationManager()
-    private let geocoder = CLGeocoder()
     
-    override init() {
+    
+    private let api: LocationApi
+    init(api: LocationApi = RealLocationService()) {
+        self.api = api
         super.init()
         locationManager.delegate = self
     }
@@ -26,16 +28,15 @@ final class LocationService: NSObject {
             locationManager.authorizationStatus == .authorizedWhenInUse {
             locationManager.requestLocation()
         } else {
+            if locationManager.authorizationStatus != .notDetermined {
+                locationError.send(.unauthorized)
+            }
             locationManager.requestWhenInUseAuthorization()
         }
     }
     
     func retrievePlacemarks(loc: CLLocation?) -> AnyPublisher<String?, Error> {
-        guard let location = loc else { return Fail(error: LocationError.fetchError).eraseToAnyPublisher() }
-        return geocoder.reverseGeocodeLocationPublisher(location)
-            .map { value -> String? in
-                return value.locality
-            }.eraseToAnyPublisher()
+        return api.retrievePlacemarks(loc: loc)
     }
 }
 
@@ -43,41 +44,29 @@ extension LocationService: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         if let error = error as? CLError, error.code == .denied {
-            locationError = .unauthorized
+            locationError.send(.unauthorized)
         } else {
-            locationError = .unableToDetermineLocation
+            locationError.send(.unableToDetermineLocation)
         }
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        location = locations.last
+        location.send(locations.last)
     }
-    
+
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .authorizedAlways,
-                .authorizedWhenInUse:
-            locationError = .none
+             .authorizedWhenInUse:
+            locationError.send(.none)
             manager.requestLocation()
         case .denied,
-                .notDetermined,
-                .restricted:
-            locationError = .unauthorized
+             .restricted:
+            locationError.send(.unauthorized)
+        case .notDetermined:
+            break
         @unknown default:
-            locationError = .unauthorized
+            break
         }
-    }
-}
-
-extension CLGeocoder {
-    func reverseGeocodeLocationPublisher(_ location: CLLocation, preferredLocale locale: Locale? = nil) -> AnyPublisher<CLPlacemark, Error> {
-        Future<CLPlacemark, Error> { promise in
-            self.reverseGeocodeLocation(location, preferredLocale: locale) { placemarks, error in
-                guard let placemark = placemarks?.first else {
-                    return promise(.failure(error ?? CLError(.geocodeFoundNoResult)))
-                }
-                return promise(.success(placemark))
-            }
-        }.eraseToAnyPublisher()
     }
 }

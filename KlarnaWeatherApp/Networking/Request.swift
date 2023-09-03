@@ -39,6 +39,10 @@ final class Request<T: Decodable> {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         
+        if !Reachability.isConnectedToNetwork() {
+            return Fail(error: URLError(.notConnectedToInternet)).eraseToAnyPublisher()
+        }
+        
         return URLSession.shared.dataTaskPublisher(for: url)
             .map(\.data)
             .decode(type: T.self, decoder: JSONDecoder())
