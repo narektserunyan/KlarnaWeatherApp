@@ -118,6 +118,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D844F3712AA5D16300194651 /* Generics */ = {
+			isa = PBXGroup;
+			children = (
+				D8AA01F52AA33C2D00FE1E9B /* Controller.swift */,
+			);
+			path = Generics;
+			sourceTree = "<group>";
+		};
 		D8AA01AD2AA3392B00FE1E9B = {
 			isa = PBXGroup;
 			children = (
@@ -143,7 +151,7 @@
 			children = (
 				D8AA01B92AA3392B00FE1E9B /* AppDelegate.swift */,
 				D8AA01BB2AA3392B00FE1E9B /* SceneDelegate.swift */,
-				D8AA01F52AA33C2D00FE1E9B /* Controller.swift */,
+				D844F3712AA5D16300194651 /* Generics */,
 				D8AA01F72AA33DDB00FE1E9B /* Networking */,
 				D8AA020A2AA3535500FE1E9B /* LocationService */,
 				D8AA02032AA3404A00FE1E9B /* Models */,

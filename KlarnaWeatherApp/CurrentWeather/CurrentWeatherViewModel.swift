@@ -41,18 +41,17 @@ final class CurrentWeatherViewModel {
         let fetchWeather = fetchWeather(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
         
         Publishers.Zip(fetchCityName, fetchWeather)
-        .receive(on: DispatchQueue.main)
-        .mapError {[weak self] error in
-            self?.connectionError.send(error as? URLError)
-            return error
-        }
-        .sink(receiveCompletion: { _ in },
-              receiveValue: { [weak self] cityName, _ in
-            self?.weather?.cityName = cityName
-        })
-        .store(in: &cancellables)
+            .receive(on: DispatchQueue.main)
+            .mapError {[weak self] error in
+                self?.connectionError.send(error as? URLError)
+                return error
+            }
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { [weak self] cityName, _ in
+                self?.weather?.cityName = cityName
+            })
+            .store(in: &cancellables)
     }
-    
     
     private func fetchWeather(lat: Double, lon: Double) -> AnyPublisher<WeatherApiResponse, Error> {
         return api.fetchWeather(lat: lat, lon: lon)
