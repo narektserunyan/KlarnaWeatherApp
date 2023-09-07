@@ -104,12 +104,15 @@ extension SearchCityView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? SearchCityCustomCell
         guard let cell = cell else { return UITableViewCell() }
-        cell.backgroundColor = .systemBackground
-        cell.cancellable = cell.tapButton.sink { [weak self] index in
+        
+        cell.setDefaultCityButton.tag = indexPath.row
+        cell.cancellable = cell.tapButton
+            .sink { [weak self] index in
+            self?.shouldActivateSearchBar(activate: false)
             self?.onSetDefaultChange.send(index)
         }
-        cell.setDefaultCityButton.tag = indexPath.row
-        if let location = viewModel?.locations.value?[indexPath.row] {
+        
+        if let location = viewModel?.locations.value?[safe: indexPath.row] {
             cell.cityNameLabel.text = "\(location.name) (\(location.country))"
         }
         return cell

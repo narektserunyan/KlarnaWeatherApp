@@ -1,8 +1,8 @@
 //
-//  KlarnaWeatherAppTests.swift
+//  CurrentWeatherTest.swift
 //  KlarnaWeatherAppTests
 //
-//  Created by Narek Tserunyan on 02.09.23.
+//  Created by Narek Tserunyan on 07.09.23.
 //
 
 import XCTest
@@ -10,67 +10,9 @@ import Combine
 import CoreLocation
 @testable import KlarnaWeatherApp
 
-final class KlarnaWeatherAppTests: XCTestCase {
-
+final class CurrentWeatherTest: XCTestCase {
+    
     private var cancellables = Set<AnyCancellable>()
-    
-    func testFetchLocations_Success() {
-        let expectation = XCTestExpectation(description: "Fetch locations Success")
-        let viewModel = SearchCityViewModel(api: FakeAPIService())
-
-        viewModel.locations
-            .receive(on: DispatchQueue.main)
-            .compactMap{$0}
-            .sink { locations in
-                XCTAssertEqual(locations.count, 2)
-                XCTAssertEqual(locations.first?.name, "Iceberg")
-                XCTAssertEqual(viewModel.locations.value?.count, 2)
-                XCTAssertEqual(viewModel.locations.value?.first?.name, "Iceberg")
-                expectation.fulfill()
-            }
-            .store(in: &cancellables)
-        
-        viewModel.fetchLocations(by: "query")
-            .sink(receiveCompletion: { completion in
-                if case .failure = completion {
-                    XCTFail("Expected Success")
-                }
-            }, receiveValue: { locations in
-                XCTAssertEqual(viewModel.locations.value?.count, 2)
-                XCTAssertEqual(viewModel.locations.value?.first?.name, "Iceberg")
-            })
-            .store(in: &cancellables)
-        
-        wait(for: [expectation], timeout: 2.0)
-    }
-    
-    func testFetchLocations_Failure() {
-        let expectation = XCTestExpectation(description: "Fetch locations Failure")
-        let api = FakeAPIService()
-        api.shouldReturnError = true
-        let viewModel = SearchCityViewModel(api: api)
-        
-        viewModel.locations
-            .receive(on: DispatchQueue.main)
-            .compactMap{$0}
-            .sink { locations in
-                XCTFail("Expected to not enter")
-            }
-            .store(in: &cancellables)
-        
-        viewModel.fetchLocations(by: "query")
-            .sink(receiveCompletion: { completion in
-                if case .failure = completion {
-                    expectation.fulfill()
-                }
-            }, receiveValue: { locations in
-                XCTFail("Expected an error")
-            })
-            .store(in: &cancellables)
-        
-        wait(for: [expectation], timeout: 2.0)
-        
-    }
     
     func testFetchWeather_Success() {
         let expectation = XCTestExpectation(description: "Fetch weather Success")
@@ -159,4 +101,5 @@ final class KlarnaWeatherAppTests: XCTestCase {
 
         wait(for: [expectation], timeout: 2.0)
     }
+
 }

@@ -11,17 +11,23 @@ import Combine
 final class SearchCityViewModel {
     
     private(set) var locations = CurrentValueSubject<[Location]?, Never>(nil)
-    
+    private(set) var error = PassthroughSubject<Error?, Never>()
+    private var cancellables: Set<AnyCancellable> = []
+
     private let api: Networking
     init(api: Networking = WebApi()) {
         self.api = api
     }
     
-    func fetchLocations(by query: String) -> AnyPublisher<[Location], Error> {
-        return api.fetchLocations(by: query)
-            .handleEvents(receiveOutput: { [weak self] locations in
-                self?.locations.send(locations)
+    func fetchLocations(by query: String) {
+        api.fetchLocations(by: query)
+            .sink(receiveCompletion: {[weak self] completion in
+                if case .failure(let error) = completion {
+                    self?.error.send(error)
+                }
+            }, receiveValue: {[weak self] value in
+                self?.locations.send(value)
             })
-            .eraseToAnyPublisher()
+            .store(in: &cancellables)
     }
 }

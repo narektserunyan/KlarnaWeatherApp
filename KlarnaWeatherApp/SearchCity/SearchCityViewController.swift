@@ -38,39 +38,32 @@ final class SearchCityViewController: Controller<SearchCityViewModel> {
             .compactMap{$0}
             .sink { [weak self] _ in
                 self?.searchCityView?.reloadCityList()
+                self?.searchCityView?.shouldShowError(show: false)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.error
+            .receive(on: DispatchQueue.main)
+            .compactMap{$0}
+            .sink { [weak self] _ in
+                self?.searchCityView?.shouldShowError(show: true)
             }
             .store(in: &cancellables)
         
         searchCityView?.onQueryChange
             .sink { [weak self] query in
-                self?.fetchLocations(with: query)
+                self?.viewModel.fetchLocations(by: query)
             }
             .store(in: &cancellables)
         
         searchCityView?.onSetDefaultChange
             .sink(receiveValue: {[weak self] index in
-                self?.searchCityView?.shouldActivateSearchBar(activate: false)
                 if Reachability.isConnectedToNetwork() {
                     self?.defaultCity.send(self?.viewModel.locations.value?[index])
                 } else {
                     self?.showAlert()
                 }
             })
-            .store(in: &cancellables)
-    }
-    
-    private func fetchLocations(with query: String) {
-        viewModel.fetchLocations(by: query)
-            .receive(on: DispatchQueue.main)
-            .ignoreOutput()
-            .sink(receiveCompletion: { [weak self] completion in
-                switch completion {
-                case .failure:
-                    self?.searchCityView?.shouldShowError(show: true)
-                default:
-                    self?.searchCityView?.shouldShowError(show: false)
-                }
-            }, receiveValue: {_ in })
             .store(in: &cancellables)
     }
     

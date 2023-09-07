@@ -39,7 +39,7 @@ final class CurrentWeatherViewController: Controller<CurrentWeatherViewModel> {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] locationErr in
                 if locationErr != nil {
-                    self?.currentWeatherView?.stopLoading()
+                    self?.currentWeatherView?.shouldAnimateIndicator(start: false)
                 }
                 self?.currentWeatherView?.shoudlShowError(show: locationErr != nil)
             }
@@ -57,7 +57,7 @@ final class CurrentWeatherViewController: Controller<CurrentWeatherViewModel> {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _weather in
                 guard let _weather = _weather else { return }
-                self?.currentWeatherView?.stopLoading()
+                self?.currentWeatherView?.shouldAnimateIndicator(start: false)
                 self?.currentWeatherView?.updateUI(with: _weather)
                 
             }
@@ -79,12 +79,12 @@ final class CurrentWeatherViewController: Controller<CurrentWeatherViewModel> {
     }
     
     @objc private func updateWithCurrentLocation() {
-        currentWeatherView?.startLoading()
+        currentWeatherView?.shouldAnimateIndicator(start: true)
         viewModel.fetchCurrentLocation()
     }
     
     private func showAlert() {
-        if presentationController != nil { return }
+        if presentedViewController != nil { return }
         let alert = ErrorAlertBuilder().title("Network problem").message("Check your internet connection").build()
         present(alert, animated: true, completion: nil)
     }

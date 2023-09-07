@@ -11,6 +11,7 @@ final class CurrentWeatherView: UIView {
     
     private let contentView = UIView()
     private let backgroundImage = UIImageView()
+    
     private let cityLabel = UILabel()
     
     private let tempStackView = UIStackView()
@@ -50,70 +51,49 @@ final class CurrentWeatherView: UIView {
         currentLocationError.isHidden = !show
     }
     
-    func startLoading() {
-        activityIndicator.startAnimating()
-    }
-    
-    func stopLoading() {
-        activityIndicator.stopAnimating()
+    func shouldAnimateIndicator(start: Bool) {
+        start ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
     }
 
     private func setupConstraints() {
         contentView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
+        cityLabel.translatesAutoresizingMaskIntoConstraints = false
+        tempStackView.translatesAutoresizingMaskIntoConstraints = false
+        conditionLabel.translatesAutoresizingMaskIntoConstraints = false
+        feelsLikeStackview.translatesAutoresizingMaskIntoConstraints = false
+        
+        currentLocationError.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: topAnchor),
             contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-        
-        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+            contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
             backgroundImage.topAnchor.constraint(equalTo: topAnchor),
             backgroundImage.leadingAnchor.constraint(equalTo: leadingAnchor),
             backgroundImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-            backgroundImage.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-        
-        cityLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+            backgroundImage.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
             cityLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            cityLabel.topAnchor.constraint(equalTo: topAnchor, constant: safeAreaInsets.top + 100)
-        ])
-        
-        tempStackView.translatesAutoresizingMaskIntoConstraints = false
-        tempStackView.addArrangedSubview(tempCelciusLabel)
-        tempStackView.addArrangedSubview(tempKelvinLabel)
-        NSLayoutConstraint.activate([
+            cityLabel.topAnchor.constraint(equalTo: topAnchor, constant: safeAreaInsets.top + 100),
+            
             tempStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            tempStackView.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 20)
-        ])
-        
-        conditionLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+            tempStackView.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 20),
+            
             conditionLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            conditionLabel.topAnchor.constraint(equalTo: tempStackView.bottomAnchor, constant: 20)
-        ])
-                
-        feelsLikeStackview.translatesAutoresizingMaskIntoConstraints = false
-        feelsLikeStackview.addArrangedSubview(feelsLikeLabel)
-        feelsLikeStackview.addArrangedSubview(feelsLikeValue)
-        NSLayoutConstraint.activate([
+            conditionLabel.topAnchor.constraint(equalTo: tempStackView.bottomAnchor, constant: 20),
+            
             feelsLikeStackview.centerXAnchor.constraint(equalTo: centerXAnchor),
-            feelsLikeStackview.topAnchor.constraint(equalTo: conditionLabel.bottomAnchor, constant: 40)
-        ])
-        
-        currentLocationError.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+            feelsLikeStackview.topAnchor.constraint(equalTo: conditionLabel.bottomAnchor, constant: 40),
+            
             currentLocationError.centerXAnchor.constraint(equalTo: centerXAnchor),
             currentLocationError.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor, constant: 16),
             currentLocationError.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor, constant: -16),
-            currentLocationError.topAnchor.constraint(equalTo: feelsLikeLabel.bottomAnchor, constant: 10)
-        ])
-        
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+            currentLocationError.topAnchor.constraint(equalTo: feelsLikeLabel.bottomAnchor, constant: 10),
+            
             activityIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
@@ -121,7 +101,6 @@ final class CurrentWeatherView: UIView {
     
     private func setupViews() {
         addSubview(contentView)
-        contentView.backgroundColor = .black
         
         backgroundImage.image = UIImage(named: "background")
         backgroundImage.clipsToBounds = true
@@ -136,15 +115,15 @@ final class CurrentWeatherView: UIView {
         tempStackView.spacing = 5
         tempStackView.alignment = .lastBaseline
         contentView.addSubview(tempStackView)
+        tempStackView.addArrangedSubview(tempCelciusLabel)
+        tempStackView.addArrangedSubview(tempKelvinLabel)
         
         tempCelciusLabel.text = "--"
         tempCelciusLabel.font = UIFont.systemFont(ofSize: 90)
         tempCelciusLabel.textColor = .white
-        contentView.addSubview(tempCelciusLabel)
         
         tempKelvinLabel.font = UIFont.boldSystemFont(ofSize: 15)
         tempKelvinLabel.textColor = .white
-        contentView.addSubview(tempKelvinLabel)
         //
         
         conditionLabel.font = UIFont.boldSystemFont(ofSize: 20)
@@ -155,16 +134,16 @@ final class CurrentWeatherView: UIView {
         feelsLikeStackview.axis = .horizontal
         feelsLikeStackview.spacing = 10
         contentView.addSubview(feelsLikeStackview)
+        feelsLikeStackview.addArrangedSubview(feelsLikeLabel)
+        feelsLikeStackview.addArrangedSubview(feelsLikeValue)
         
         feelsLikeLabel.text = "Feels like:"
         feelsLikeLabel.font = UIFont.boldSystemFont(ofSize: 15)
         feelsLikeLabel.textColor = .white
-        contentView.addSubview(feelsLikeLabel)
         
         feelsLikeValue.text = "--"
         feelsLikeValue.font = UIFont.boldSystemFont(ofSize: 15)
         feelsLikeValue.textColor = .white
-        contentView.addSubview(feelsLikeValue)
         //
         
         currentLocationError.text = "Current location couln't be determined, enable from system settings"

@@ -24,6 +24,7 @@ final class CurrentWeatherViewModel {
         self.locationService = LocationService(api: locationServiceApi)
         
         locationService.locationError.subscribe(locationError).store(in: &cancellables)
+        
         locationService.location
             .sink { [weak self] location in
                 guard let location = location else { return }
