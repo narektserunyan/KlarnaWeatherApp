@@ -43,12 +43,11 @@ final class CurrentWeatherViewModel {
         
         Publishers.Zip(fetchCityName, fetchWeather)
             .receive(on: DispatchQueue.main)
-            .mapError {[weak self] error in
-                self?.connectionError.send(error as? URLError)
-                return error
-            }
-            .sink(receiveCompletion: { _ in },
-                  receiveValue: { [weak self] cityName, _ in
+            .sink(receiveCompletion: {[weak self] completion in
+                if case .failure(let error) = completion {
+                    self?.connectionError.send(error as? URLError)
+                }
+            }, receiveValue: {[weak self] cityName, _ in
                 self?.weather?.cityName = cityName
             })
             .store(in: &cancellables)
