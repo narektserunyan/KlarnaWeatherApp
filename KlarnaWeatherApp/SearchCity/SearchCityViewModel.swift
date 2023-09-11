@@ -13,13 +13,22 @@ final class SearchCityViewModel {
     private(set) var locations = CurrentValueSubject<[Location]?, Never>(nil)
     private(set) var error = PassthroughSubject<Error?, Never>()
     private var cancellables: Set<AnyCancellable> = []
+    
+    let onQueryChange = PassthroughSubject<String, Never>()
+    let defaultCity = PassthroughSubject<Location?, Never>()
 
     private let api: Networking
     init(api: Networking = WebApi()) {
         self.api = api
+        
+        onQueryChange
+            .sink { [weak self] query in
+                self?.fetchLocations(by: query)
+            }
+            .store(in: &cancellables)
     }
     
-    func fetchLocations(by query: String) {
+    private func fetchLocations(by query: String) {
         if query.isEmpty {
             locations.send([])
             return

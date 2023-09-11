@@ -49,6 +49,7 @@ final class CurrentWeatherViewModel {
                 }
             }, receiveValue: {[weak self] cityName, _ in
                 self?.weather?.cityName = cityName
+                self?.connectionError.send(nil)
             })
             .store(in: &cancellables)
     }

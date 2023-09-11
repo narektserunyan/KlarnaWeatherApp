@@ -36,7 +36,7 @@ final class FetchLocationsTest: XCTestCase {
             }
             .store(in: &cancellables)
         
-        viewModel.fetchLocations(by: "testQuery")
+        viewModel.onQueryChange.send("testQuery")
         
         wait(for: [expectation], timeout: 2.0)
     }
@@ -62,7 +62,7 @@ final class FetchLocationsTest: XCTestCase {
             }
             .store(in: &cancellables)
         
-        viewModel.fetchLocations(by: "Testquery")
+        viewModel.onQueryChange.send("testQuery")
         
         wait(for: [expectation], timeout: 2.0)
     }

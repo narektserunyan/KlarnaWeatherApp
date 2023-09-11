@@ -7,9 +7,10 @@
 
 import UIKit
 
-class Controller<T>: UIViewController {
+class Controller<T, U>: UIViewController {
     
     let viewModel: T
+    var contentView: U?
     
     convenience init() {
         fatalError("init() has not been implemented")

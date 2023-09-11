@@ -47,8 +47,9 @@ final class CurrentWeatherView: UIView {
         conditionLabel.text = weather.weatherCondition?.weatherDescription
     }
     
-    func shoudlShowError(show: Bool) {
+    func shoudlShowError(show: Bool, message: String? = nil) {
         currentLocationError.isHidden = !show
+        currentLocationError.text = message
     }
     
     func shouldAnimateIndicator(start: Bool) {
@@ -146,7 +147,6 @@ final class CurrentWeatherView: UIView {
         feelsLikeValue.textColor = .white
         //
         
-        currentLocationError.text = "Current location couln't be determined, enable from system settings"
         currentLocationError.isHidden = true
         currentLocationError.font = UIFont.boldSystemFont(ofSize: 15)
         currentLocationError.textColor = .darkText

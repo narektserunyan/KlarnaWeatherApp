@@ -9,15 +9,14 @@ import UIKit
 import Combine
 import CoreLocation
 
-final class CurrentWeatherViewController: Controller<CurrentWeatherViewModel> {
+final class CurrentWeatherViewController: Controller<CurrentWeatherViewModel, CurrentWeatherView> {
     
-    private var currentWeatherView: CurrentWeatherView?
     private var cancellables: Set<AnyCancellable> = []
     
     override func loadView() {
         super.loadView()
-        currentWeatherView = CurrentWeatherView(frame: view.bounds)
-        view = currentWeatherView
+        contentView = CurrentWeatherView(frame: view.bounds)
+        view = contentView
     }
     
     override func viewDidLoad() {
@@ -38,17 +37,16 @@ final class CurrentWeatherViewController: Controller<CurrentWeatherViewModel> {
         viewModel.locationError
             .receive(on: DispatchQueue.main)
             .sink { [weak self] locationErr in
-                if locationErr != nil {
-                    self?.currentWeatherView?.shouldAnimateIndicator(start: false)
-                }
-                self?.currentWeatherView?.shoudlShowError(show: locationErr != nil)
+                self?.contentView?.shoudlShowError(show: locationErr != nil, message: "Current location couln't be determined, enable from system settings")
+                self?.contentView?.shouldAnimateIndicator(start: false)
             }
             .store(in: &cancellables)
         
         viewModel.connectionError
             .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
-                self?.showAlert()
+                self?.contentView?.shoudlShowError(show: error != nil, message: "Internet connection issue")
+                self?.contentView?.shouldAnimateIndicator(start: false)
             }
             .store(in: &cancellables)
         
@@ -57,16 +55,16 @@ final class CurrentWeatherViewController: Controller<CurrentWeatherViewModel> {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _weather in
                 guard let _weather = _weather else { return }
-                self?.currentWeatherView?.shouldAnimateIndicator(start: false)
-                self?.currentWeatherView?.updateUI(with: _weather)
+                self?.contentView?.shouldAnimateIndicator(start: false)
+                self?.contentView?.updateUI(with: _weather)
                 
             }
             .store(in: &cancellables)
     }
     
     @objc private func searchCity() {
-        let searchCityViewController = SearchCityViewController(viewModel: SearchCityViewModel())
-        searchCityViewController.defaultCity
+        let searchViewModel = SearchCityViewModel()
+        searchViewModel.defaultCity
             .receive(on: DispatchQueue.main)
             .sink { [weak self] city in
                 guard let city = city else { return }
@@ -75,17 +73,13 @@ final class CurrentWeatherViewController: Controller<CurrentWeatherViewModel> {
             }
             .store(in: &cancellables)
         
+        let searchCityViewController = SearchCityViewController(viewModel: searchViewModel)
         navigationController?.pushViewController(searchCityViewController, animated: true)
     }
     
     @objc private func updateWithCurrentLocation() {
-        currentWeatherView?.shouldAnimateIndicator(start: true)
+        contentView?.shoudlShowError(show: false)
+        contentView?.shouldAnimateIndicator(start: true)
         viewModel.fetchCurrentLocation()
-    }
-    
-    private func showAlert() {
-        if presentedViewController != nil { return }
-        let alert = ErrorAlertBuilder().title("Network problem").message("Check your internet connection").build()
-        present(alert, animated: true, completion: nil)
     }
 }

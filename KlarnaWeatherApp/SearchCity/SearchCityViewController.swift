@@ -8,22 +8,20 @@
 import UIKit
 import Combine
 
-final class SearchCityViewController: Controller<SearchCityViewModel> {
+final class SearchCityViewController: Controller<SearchCityViewModel, SearchCityView> {
     
-    private var searchCityView: SearchCityView?
     private var cancellables: Set<AnyCancellable> = []
-    var defaultCity = PassthroughSubject<Location?, Never>()
     
     override func loadView() {
         super.loadView()
-        searchCityView = SearchCityView(frame: view.bounds)
-        searchCityView?.viewModel = viewModel
-        view = searchCityView
+        contentView = SearchCityView(frame: view.bounds)
+        contentView?.viewModel = viewModel
+        view = contentView
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        searchCityView?.shouldActivateSearchBar(activate: true)
+        contentView?.shouldActivateSearchBar(activate: true)
     }
     
     override func viewDidLoad() {
@@ -37,8 +35,8 @@ final class SearchCityViewController: Controller<SearchCityViewModel> {
             .receive(on: DispatchQueue.main)
             .compactMap{$0}
             .sink { [weak self] _ in
-                self?.searchCityView?.reloadCityList()
-                self?.searchCityView?.shouldShowError(show: false)
+                self?.contentView?.reloadCityList()
+                self?.contentView?.shouldShowError(show: false)
             }
             .store(in: &cancellables)
         
@@ -46,29 +44,8 @@ final class SearchCityViewController: Controller<SearchCityViewModel> {
             .receive(on: DispatchQueue.main)
             .compactMap{$0}
             .sink { [weak self] _ in
-                self?.searchCityView?.shouldShowError(show: true)
+                self?.contentView?.shouldShowError(show: true)
             }
             .store(in: &cancellables)
-        
-        searchCityView?.onQueryChange
-            .sink { [weak self] query in
-                self?.viewModel.fetchLocations(by: query)
-            }
-            .store(in: &cancellables)
-        
-        searchCityView?.onSetDefaultChange
-            .sink(receiveValue: {[weak self] index in
-                if Reachability.isConnectedToNetwork() {
-                    self?.defaultCity.send(self?.viewModel.locations.value?[index])
-                } else {
-                    self?.showAlert()
-                }
-            })
-            .store(in: &cancellables)
-    }
-    
-    private func showAlert() {
-        let alert = ErrorAlertBuilder().title("Network problem").message("Check your internet connection").build()
-        present(alert, animated: true, completion: nil)
     }
 }

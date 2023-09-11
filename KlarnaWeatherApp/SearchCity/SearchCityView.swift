@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Combine
 
 final class SearchCityView: UIView {
     
@@ -15,11 +14,7 @@ final class SearchCityView: UIView {
     private let tableView = UITableView()
     private let searchController = UISearchController(searchResultsController: nil)
     private let errorLabel = UILabel()
-        
-    let onQueryChange = PassthroughSubject<String, Never>()
-    var onSetDefaultChange = PassthroughSubject<Int, Never>()
-    private var cancellables: Set<AnyCancellable> = []
-    
+            
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -84,7 +79,7 @@ extension SearchCityView: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let query = searchController.searchBar.text else { return }
         let trimmedQuery = query.trimmingCharacters(in: .whitespaces)
-        onQueryChange.send(trimmedQuery)
+        viewModel?.onQueryChange.send(trimmedQuery)
     }
 }
 
@@ -100,7 +95,7 @@ extension SearchCityView: UITableViewDelegate, UITableViewDataSource {
         cell.setDefaultCityButton.tag = indexPath.row
         cell.cancellable = cell.tapButton
             .sink { [weak self] index in
-                self?.onSetDefaultChange.send(index)
+                self?.viewModel?.defaultCity.send(self?.viewModel?.locations.value?[safe: index])
                 self?.shouldActivateSearchBar(activate: false)
             }
         

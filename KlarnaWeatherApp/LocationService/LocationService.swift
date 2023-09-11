@@ -57,7 +57,7 @@ extension LocationService: CLLocationManagerDelegate {
         switch manager.authorizationStatus {
         case .authorizedAlways,
              .authorizedWhenInUse:
-            locationError.send(.none)
+            locationError.send(nil)
             manager.requestLocation()
         case .denied,
              .restricted:
