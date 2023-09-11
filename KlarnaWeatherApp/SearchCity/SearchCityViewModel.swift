@@ -21,6 +21,7 @@ final class SearchCityViewModel {
     
     func fetchLocations(by query: String) {
         api.fetchLocations(by: query)
+            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: {[weak self] completion in
                 if case .failure(let error) = completion {
                     self?.error.send(error)
