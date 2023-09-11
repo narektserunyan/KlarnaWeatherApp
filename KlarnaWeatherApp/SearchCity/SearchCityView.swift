@@ -15,9 +15,7 @@ final class SearchCityView: UIView {
     private let tableView = UITableView()
     private let searchController = UISearchController(searchResultsController: nil)
     private let errorLabel = UILabel()
-
-    private var shouldShowInvalidSearchResult: Bool = false
-    
+        
     let onQueryChange = PassthroughSubject<String, Never>()
     var onSetDefaultChange = PassthroughSubject<Int, Never>()
     private var cancellables: Set<AnyCancellable> = []
@@ -86,19 +84,13 @@ extension SearchCityView: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let query = searchController.searchBar.text else { return }
         let trimmedQuery = query.trimmingCharacters(in: .whitespaces)
-        if trimmedQuery.count > 1 {
-            shouldShowInvalidSearchResult = false
-            onQueryChange.send(trimmedQuery)
-        } else {
-            shouldShowInvalidSearchResult = true
-            tableView.reloadData()
-        }
+        onQueryChange.send(trimmedQuery)
     }
 }
 
 extension SearchCityView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shouldShowInvalidSearchResult ? 0 : viewModel?.locations.value?.count ?? 0
+        return viewModel?.locations.value?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -108,9 +100,9 @@ extension SearchCityView: UITableViewDelegate, UITableViewDataSource {
         cell.setDefaultCityButton.tag = indexPath.row
         cell.cancellable = cell.tapButton
             .sink { [weak self] index in
-            self?.shouldActivateSearchBar(activate: false)
-            self?.onSetDefaultChange.send(index)
-        }
+                self?.onSetDefaultChange.send(index)
+                self?.shouldActivateSearchBar(activate: false)
+            }
         
         if let location = viewModel?.locations.value?[safe: indexPath.row] {
             cell.cityNameLabel.text = "\(location.name) (\(location.country))"

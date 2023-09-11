@@ -20,6 +20,11 @@ final class SearchCityViewModel {
     }
     
     func fetchLocations(by query: String) {
+        if query.isEmpty {
+            locations.send([])
+            return
+        }
+        
         api.fetchLocations(by: query)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: {[weak self] completion in
